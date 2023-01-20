@@ -7,7 +7,7 @@
     tools:context=".CategoriesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_plats"
+        android:id="@+id/categoryList"
         android:layout_width="166dp"
         android:layout_height="622dp"
         app:layout_constraintBottom_toBottomOf="parent"

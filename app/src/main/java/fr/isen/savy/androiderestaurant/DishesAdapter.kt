@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class DishesAdapter (private val listDish: List<Dish>) : RecyclerView.Adapter<DishesAdapter.ViewHolder>()
+class DishesAdapter(private var listDish: ArrayList<Dish>) : RecyclerView.Adapter<DishesAdapter.ViewHolder>()
 {    // Define the listener interface
     interface OnItemClickListener {
         fun onItemClick(itemView: View?, position: Int)
@@ -51,14 +51,19 @@ class DishesAdapter (private val listDish: List<Dish>) : RecyclerView.Adapter<Di
     // Involves populating data into the item through holder
     override fun onBindViewHolder(viewHolder: DishesAdapter.ViewHolder, position: Int) {
         // Get the data model based on position
-        val dish: Dish = listDish[position]
+        val item = listDish[position].name
         // Set item views based on your views and data model
         val textView = viewHolder.nameTextView
-        textView.text = dish.name
+        textView.text = item
     }
 
     // Returns the total count of items in the list
     override fun getItemCount(): Int {
         return listDish.size
+    }
+
+    fun refreshList(mealFromAPI: ArrayList<Dish>) {
+        listDish = mealFromAPI
+        notifyDataSetChanged()
     }
 }

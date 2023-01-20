@@ -81,7 +81,7 @@ class CategoriesActivity : AppCompatActivity() {
         // Create adapter passing in the sample user data
         val adapter : DishesAdapter = DishesAdapter(dishes)
 
-        val listePlats = findViewById<View>(R.id.recycler_plats) as RecyclerView
+        val listePlats = findViewById<View>(R.id.categoryList) as RecyclerView
 
         // Attach the adapter to the recyclerview to populate items
         listePlats.adapter = adapter
@@ -118,10 +118,10 @@ class CategoriesActivity : AppCompatActivity() {
 
     private fun handleAPIData(data : String) {
         val dishesResult = Gson().fromJson(data,RepasListe::class.java)
-        val dishCategoryFiltered = dishesResult.data.firstOrNull{ it.name_fr == category }
+        val dishCategory = dishesResult.data.firstOrNull{ it.name_fr == category }
 
-        val adapter = binding.Detail.adapter as CategoryAdapter
-        adapter.refreshList(dishCategoryFiltered)
+        val adapter = binding.categoryList.adapter as DishesAdapter
+        adapter.refreshList(dishCategory?.list?.map { it.name_fr } as ArrayList<Dish>)
     }
 
 }
