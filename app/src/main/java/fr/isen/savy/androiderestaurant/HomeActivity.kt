@@ -1,10 +1,10 @@
 package fr.isen.savy.androiderestaurant
 
+
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import fr.isen.savy.androiderestaurant.databinding.ActivityHomeBinding
 
 
@@ -17,34 +17,31 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnEntrees.setOnClickListener {
-            Toast.makeText(this, "Entrées", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this@HomeActivity, CategoryActivity::class.java)
+        val intent = Intent(this@HomeActivity, CategoryActivity::class.java)
 
-            intent.putExtra("category_name", "Entrées")
-
+        binding.buttonStarter.setOnClickListener {
+            intent.putExtra("categoryName", "Entrées")
+            val mealList = resources.getStringArray(R.array.entries_list).toList() as ArrayList<String>
+            intent.putExtra("List_Meal", mealList)
             startActivity(intent)
         }
 
-        binding.btnPlats.setOnClickListener {
-            Toast.makeText(this, "Plats", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this@HomeActivity, CategoryActivity::class.java)
-
-            intent.putExtra("category_name", "Plats")
-
+        binding.buttonMainCourse.setOnClickListener {
+            intent.putExtra("categoryName", "Plats")
+            val mealList = resources.getStringArray(R.array.main_courses_list).toList() as ArrayList<String>
+            intent.putExtra("List_Meal", mealList)
             startActivity(intent)
         }
-        binding.btnDesserts.setOnClickListener {
-            Toast.makeText(this,"Desserts", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this@HomeActivity, CategoryActivity::class.java)
 
-            intent.putExtra("category_name", "Desserts")
-
+        binding.buttonDessert.setOnClickListener {
+            intent.putExtra("categoryName", "Desserts")
+            val mealList = resources.getStringArray(R.array.desserts_list).toList() as ArrayList<String>
+            intent.putExtra("List_Meal", mealList)
             startActivity(intent)
         }
     }
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("HomeActivity", "onDestroy() called")
+        Log.d("HomeActivity", "L'activité Home a été détruite")
     }
 }
