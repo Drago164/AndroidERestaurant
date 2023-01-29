@@ -14,41 +14,27 @@ import com.google.gson.Gson
 import fr.isen.savy.androiderestaurant.model.DataResult
 import fr.isen.savy.androiderestaurant.model.Items
 
-
-
-
 class CategoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCategoryBinding
-    private var itemsList = ArrayList<Items>()
-    private lateinit var myCategoryAdapter : DishAdapter
     private lateinit var category: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        category = intent.getStringExtra("categoryName") ?: ""
-        this.title=category
 
         binding = ActivityCategoryBinding.inflate(layoutInflater)
+
         val view = binding.root
         setContentView(view)
 
+        category = intent.getStringExtra("categoryName") ?: ""
+        val actionBar = supportActionBar
+        actionBar?.title = category
 
-        val menuName = intent.getStringExtra("categoryName") ?: ""
-        val menuList = intent.getStringArrayListExtra("List_Meal")
-
-        if (menuList != null) {
-            supportActionBar?.title = menuName
-
-            myCategoryAdapter = DishAdapter(itemsList){
-                val intent = Intent(this, CategoryActivity::class.java)
-                intent.putExtra("categoryName", "Entrées")
-                startActivity(intent)
-            }
-            val layoutManager = LinearLayoutManager(applicationContext)
-            binding.categoryList.layoutManager = layoutManager
-            binding.categoryList.adapter = myCategoryAdapter
-            binding.categoryList.layoutManager = LinearLayoutManager(this)
+        binding.categoryList.layoutManager = LinearLayoutManager(this)
+        binding.categoryList.adapter = DishAdapter(arrayListOf()) {
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("detail", it)
+            startActivity(intent)
         }
         loadDishesFromAPI()
 

@@ -1,8 +1,6 @@
 package fr.isen.savy.androiderestaurant.model
 
 import com.google.gson.annotations.SerializedName
-import fr.isen.savy.androiderestaurant.model.Ingredients
-import fr.isen.savy.androiderestaurant.model.Prices
 
 
 data class Items (
@@ -17,4 +15,4 @@ data class Items (
   @SerializedName("ingredients"   ) var ingredients : ArrayList<Ingredients> = arrayListOf(),
   @SerializedName("prices"        ) var prices      : ArrayList<Prices>      = arrayListOf()
 
-)
+):java.io.Serializable
