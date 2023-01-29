@@ -1,5 +1,6 @@
 package fr.isen.savy.androiderestaurant
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -7,6 +8,7 @@ import android.widget.TextView
 import com.squareup.picasso.Picasso
 import fr.isen.savy.androiderestaurant.databinding.ActivityDetailBinding
 import fr.isen.savy.androiderestaurant.model.Items
+import org.json.JSONObject
 import java.lang.StringBuilder
 
 class DetailActivity : AppCompatActivity() {
@@ -55,6 +57,7 @@ class DetailActivity : AppCompatActivity() {
         val priceunique = dataItems.prices[0].price?.toDouble()
 
         var addition = 0
+        val number = addition * priceunique!!
 
         binding.addDetail.setOnClickListener {
             addition++
@@ -68,9 +71,13 @@ class DetailActivity : AppCompatActivity() {
                 val number = addition * priceunique!!
                 binding.prixDetail.text = number.toString()
             }
-        }
+            val data = JSONObject()
+            data.put("prix", number)
 
-        /*Sub Button */
+            val fileOutputStream = openFileOutput("pannier.json", Context.MODE_PRIVATE)
+            fileOutputStream.write(data.toString().toByteArray())
+            fileOutputStream.close()
+        }
         binding.subDetail.setOnClickListener {
             addition--
             binding.quantityDetail.setText(
@@ -78,6 +85,16 @@ class DetailActivity : AppCompatActivity() {
             )
             val number = addition * priceunique!!
             binding.prixDetail.text = number.toString()
+        }
+
+        if (dataItems.prices.isNotEmpty()) {
+            prix.forEach { prix ->
+                priceString.append(prix.price)
+                priceString.append("$")
+                priceString.append("\n")
+            }
+            binding.prixDetail.text = priceString
+
         }
     }
 }
