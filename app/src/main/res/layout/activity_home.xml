@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="172dp"
-        android:layout_height="85dp"
+        android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:text="Bienvenue         chez"
         android:textAlignment="textEnd"
@@ -26,11 +26,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="181dp"
-        android:layout_height="27dp"
+        android:layout_width="237dp"
+        android:layout_height="31dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="casual"
         android:text="DroidRestaurant"
+        android:textAlignment="viewEnd"
         android:textAllCaps="false"
         android:textColor="#833C06"
         android:textColorHint="#FFFFFF"
@@ -45,50 +46,51 @@
 
     <Button
         android:id="@+id/buttonStarter"
-        android:layout_width="176dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="348dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="#02FFFFFF"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-medium"
         android:onClick="BtnEntrees"
         android:text="Entrées"
         android:textColor="#FB8C00"
-        android:textSize="24sp"
+        android:textSize="34sp"
         app:iconTint="#FEFEFE"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.514" />
 
     <Button
         android:id="@+id/buttonMainCourse"
-        android:layout_width="176dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="468dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="#00FFFFFF"
         android:onClick="BtnPlats"
         android:text="Plats"
         android:textColor="#FB8C00"
-        android:textSize="24sp"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonStarter"
+        app:layout_constraintVertical_bias="0.187" />
 
     <Button
         android:id="@+id/buttonDessert"
-        android:layout_width="176dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="588dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="#00FFFFFF"
         android:onClick="BtnDesserts"
         android:text="Desserts"
         android:textColor="#FB8C00"
-        android:textSize="24sp"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonMainCourse"
+        app:layout_constraintVertical_bias="0.302" />
 
     <ImageView
         android:id="@+id/imageView"
