@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.widget.TextView
+import android.widget.Toast
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import fr.isen.savy.androiderestaurant.databinding.ActivityDetailBinding
 import fr.isen.savy.androiderestaurant.model.Items
-import org.json.JSONObject
 import java.lang.StringBuilder
 
 class DetailActivity : AppCompatActivity() {
@@ -57,7 +58,6 @@ class DetailActivity : AppCompatActivity() {
         val priceunique = dataItems.prices[0].price?.toDouble()
 
         var addition = 0
-        val number = addition * priceunique!!
 
         binding.addDetail.setOnClickListener {
             addition++
@@ -69,14 +69,8 @@ class DetailActivity : AppCompatActivity() {
                     priceString.append("$")
                 }
                 val number = addition * priceunique!!
-                binding.prixDetail.text = number.toString()
+                binding.priceDetail.text = "Total : $number"
             }
-            val data = JSONObject()
-            data.put("prix", number)
-
-            val fileOutputStream = openFileOutput("pannier.json", Context.MODE_PRIVATE)
-            fileOutputStream.write(data.toString().toByteArray())
-            fileOutputStream.close()
         }
         binding.subDetail.setOnClickListener {
             addition--
@@ -84,17 +78,18 @@ class DetailActivity : AppCompatActivity() {
                 Editable.Factory.getInstance().newEditable(addition.toString())
             )
             val number = addition * priceunique!!
-            binding.prixDetail.text = number.toString()
+            binding.priceDetail.text = "Total : $number"
         }
 
-        if (dataItems.prices.isNotEmpty()) {
-            prix.forEach { prix ->
-                priceString.append(prix.price)
-                priceString.append("$")
-                priceString.append("\n")
-            }
-            binding.prixDetail.text = priceString
+        binding.priceDetail.setOnClickListener {
+            val total = addition * priceunique!!
+            val data = ("Article : $text ; Number : $addition ; Price Unite: $priceunique ; Total : $total")
+            val fileOutputStream = openFileOutput("pannier.json", Context.MODE_PRIVATE)
 
+            fileOutputStream.write(data.toByteArray())
+            fileOutputStream.close()
+
+            Toast.makeText(this,"Article ajouté au panier", Toast.LENGTH_LONG).show()
         }
     }
 }
