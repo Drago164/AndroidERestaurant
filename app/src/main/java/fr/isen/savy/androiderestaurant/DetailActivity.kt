@@ -7,8 +7,6 @@ import android.text.Editable
 import android.widget.TextView
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
-import com.google.gson.Gson
-import com.squareup.picasso.Picasso
 import fr.isen.savy.androiderestaurant.databinding.ActivityDetailBinding
 import fr.isen.savy.androiderestaurant.model.Items
 import java.lang.StringBuilder

@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.squareup.picasso.Picasso
-import fr.isen.savy.androiderestaurant.R
 
-class CarrouselAdapter (private val mContext: Context, private  val itemList: ArrayList<String>) : PagerAdapter() {
+internal class CarrouselAdapter (private val mContext: Context, private  val itemList: ArrayList<String>) : PagerAdapter() {
     private var layoutInflater: LayoutInflater? = null
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
