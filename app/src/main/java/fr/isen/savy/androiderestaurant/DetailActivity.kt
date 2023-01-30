@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.widget.TextView
 import android.widget.Toast
+import androidx.viewpager.widget.ViewPager
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import fr.isen.savy.androiderestaurant.databinding.ActivityDetailBinding
@@ -38,9 +39,10 @@ class DetailActivity : AppCompatActivity() {
         val text = nameDish
         textView.text = text
 
-        if (dataItems.images.isNotEmpty()) {
-            Picasso.get().load(dataItems.images[0]).into(binding.imageDetail);
-        }
+        val viewPager = findViewById<ViewPager>(R.id.imageDetail)
+
+        val mCarrouselAdapter = CarrouselAdapter(this, this.dataItems.images)
+        viewPager.adapter = mCarrouselAdapter
 
         val ingredients = dataItems.ingredients
 
